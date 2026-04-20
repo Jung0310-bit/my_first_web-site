@@ -1,0 +1,244 @@
+---
+title: "Cyber Threat Intelligence Lifecycle: From Raw Data to Actionable Intel"
+datePublished: 2026-04-20T09:00:00.000Z
+cuid: cmo6yshvt000221c7aa182tx7
+slug: cyber-threat-intelligence-lifecycle-from-raw-data-to-actionable-intel
+tags: infosec, cybersecurity, blue-team, cti, threat-intelligence
+
+---
+
+# Cyber Threat Intelligence Lifecycle: From Raw Data to Actionable Intel
+
+Threat intelligence only matters if someone can act on it. A feed of 10,000 IOCs nobody uses is just noise. The CTI lifecycle is how analysts turn raw data into intelligence that actually drives decisions. This post covers the six phases, the four types of intelligence, and the protocols that govern how it's shared.
+
+---
+
+## The Six-Phase Lifecycle
+
+CTI is a continuous cycle, not a linear process. Each phase feeds into the next, and feedback loops back to improve everything.
+
+```
+Direction → Collection → Processing → Analysis → Dissemination → Feedback
+    ↑                                                              ↓
+    └──────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Phase 1: Planning and Direction
+
+Define what you're looking for and why. Without this, you drown in data.
+
+**Key questions to answer:**
+- What assets and business processes need protection?
+- What's the potential impact if they're compromised?
+- What data sources and tools do we need?
+- Who consumes this intelligence — analysts, SOC, executives?
+
+**Example objectives:**
+- Research a specific APT group targeting your sector
+- Assess the organization's public attack surface
+- Determine defensive actions against an emerging threat
+- Build a watchlist for an upcoming campaign
+
+The direction phase scopes everything downstream. Bad direction = wasted collection.
+
+---
+
+## Phase 2: Collection
+
+Gather data from diverse sources. Variety matters — a single source is a blind spot.
+
+### Internal Sources
+- Security events and logs
+- Vulnerability assessment reports
+- Past incident reports
+- Network traffic captures
+- EDR telemetry
+
+### OSINT (Open Source)
+- **Threat feeds** — Spamhaus, URLhaus, AlienVault OTX, SANS ISC
+- **Government alerts** — CISA (US, absorbed US-CERT in 2023), NCSC (UK), ACSC (Australia)
+- **Social media** — Twitter/X, Reddit, Mastodon infosec community
+- **Vendor blogs** — Mandiant, CrowdStrike, Microsoft threat intel
+- **Research papers**
+
+### Paid Intelligence
+- Mandiant, Recorded Future, CrowdStrike, Flashpoint, Intel471
+- More curated, less noise, faster updates — but expensive
+
+### Community
+- ISACs (Information Sharing and Analysis Centers)
+- Dark web forums (with appropriate legal guardrails)
+- Information-sharing partnerships
+
+### Platforms
+- Centralize through Threat Intelligence Platforms (TIPs) like **MISP**
+- Standard formats: STIX/TAXII, JSON, CSV
+
+**Automation is critical.** You can't manually triage thousands of IOCs per day.
+
+---
+
+## Phase 3: Processing
+
+Transform raw data into a usable format.
+
+- Extract, sort, and correlate raw data from logs, malware samples, network traffic
+- **Translate** non-English sources (dark web forums are often in Russian)
+- **Deduplicate** — multiple feeds often report the same IOC
+- **Normalize** — standardize formats (IP vs CIDR, domain vs URL)
+- **Tag** data by type, source, confidence
+- **Enrich** — add WHOIS data, geolocation, VirusTotal reputation
+
+SIEMs and TIPs handle most of this automatically if configured well.
+
+---
+
+## Phase 4: Analysis
+
+Convert processed information into actionable intelligence. This is where human expertise matters.
+
+- **Identify patterns** — indicators, attack chains, infrastructure reuse
+- **Build action plans** — prevention, detection, response recommendations
+- **Justify investments** — data supporting additional security resources
+- **Tailor presentation** — technical detail for analysts, high-level summary for executives
+
+The output of analysis is **intelligence**, not data. Intelligence answers "so what?" and "now what?"
+
+---
+
+## Phase 5: Dissemination
+
+Deliver the right intelligence to the right people in the right format.
+
+### Target Audiences
+
+| Audience | Format | Content |
+|----------|--------|---------|
+| **C-suite** | Concise reports | Trends, financial impact, strategic recommendations |
+| **Security leadership** | Monthly briefings | Threat landscape, resource needs |
+| **Technical teams** | Detailed reports | IOCs, TTPs, tactical action plans |
+| **SOC analysts** | SIEM feeds | Watchlists, detection rules, correlation queries |
+| **IR team** | Playbooks | Response procedures for specific threats |
+
+**Key considerations:**
+- What does each audience actually need (not what you want to tell them)
+- How often should they receive updates
+- Through what channels (email, dashboard, API, ticket)
+
+---
+
+## Phase 6: Feedback
+
+This is the phase most teams skip — and it's what makes CTI actually improve.
+
+- **Collect stakeholder responses** — was the intelligence useful? actionable? timely?
+- **Guide future collection** — what data should we gather more of?
+- **Improve processing** — are we missing context? over-filtering?
+- **Adjust analysis** — is the confidence assessment accurate?
+- **Refine dissemination** — right audience? right format?
+
+Feedback maintains the cycle. Without it, CTI becomes a one-way broadcast nobody listens to.
+
+---
+
+## The Four Types of Intelligence
+
+Not all CTI is the same. Different types serve different audiences.
+
+| Type | Audience | Focus | Example |
+|------|----------|-------|---------|
+| **Strategic** | Executives, board | High-level trends, geopolitics, risk landscape | "Ransomware attacks against healthcare increased 50% in Q1" |
+| **Operational** | Threat intel analysts | Threat actor motivations, TTPs, campaigns | "APT33 is targeting aviation — here's their current infrastructure" |
+| **Tactical** | SOC analysts, defenders | Technical IOCs for immediate defense | List of malicious IPs for firewall blocklist |
+| **Technical** | Incident response | Attack artifacts, malware samples | Specific exploit code, YARA rules, malware hashes |
+
+Confusion between these types is the source of most CTI complaints. An executive doesn't want IOCs. A SOC analyst doesn't want a geopolitical essay.
+
+---
+
+## Traffic Light Protocol (TLP)
+
+TLP governs how intelligence may be **shared**. Created by UK NISCC, used globally.
+
+| Level | Distribution |
+|-------|-------------|
+| **TLP:Clear** | Freely shareable, public |
+| **TLP:Green** | Within trusted communities (e.g., ISACs), not public |
+| **TLP:Amber** | Internal teams and clients, need-to-know |
+| **TLP:Amber+Strict** | Organization only, no clients |
+| **TLP:Red** | Original recipients only, no further sharing |
+
+Always check TLP before forwarding intelligence. Sharing TLP:Red beyond its scope can destroy trust relationships.
+
+---
+
+## Permissible Action Protocol (PAP)
+
+PAP governs what **actions** may be taken with the intelligence. Developed under MISP in 2016.
+
+| Level | Permitted Actions |
+|-------|------------------|
+| **PAP:Clear** | Unrestricted actions within legal frameworks |
+| **PAP:Green** | Controlled non-intrusive actions (e.g., blocking IPs at firewall) |
+| **PAP:Amber** | Passive investigation only, no threat interaction |
+| **PAP:Red** | Secure threat analysis in segregated environments only |
+
+TLP and PAP together answer: who can see this, and what can they do with it.
+
+---
+
+## IOC Sharing Formats
+
+- **STIX** (Structured Threat Information eXpression) — standardized language for describing IOCs, TTPs, motivations, and relationships
+- **TAXII** (Trusted Automated eXchange of Intelligence Information) — the transport protocol for sharing STIX data
+
+Together they enable automated, machine-readable threat intelligence sharing.
+
+---
+
+## OSINT vs Paid Intelligence
+
+Most teams debate this. The honest answer:
+
+**OSINT:**
+- Free, widely available
+- Requires verification (can be outdated or wrong)
+- Best as a starting point
+- Good for trend analysis and community awareness
+
+**Paid Intelligence:**
+- Curated, industry-tailored
+- Regularly updated
+- Expensive
+- Requires skilled interpretation to get full value
+
+**Hybrid is the answer** for most organizations. Use OSINT for breadth, paid for depth in critical areas.
+
+---
+
+## ISACs: Industry-Specific Sharing
+
+**Information Sharing and Analysis Centers** are industry-specific groups where organizations share IOCs, attack details, and trends.
+
+Examples:
+- **FS-ISAC** — Financial Services
+- **Aviation ISAC** — Aviation
+- **H-ISAC** — Healthcare
+- **E-ISAC** — Electricity
+
+Joining your sector's ISAC is usually the highest-value threat intel move you can make.
+
+---
+
+## Key Takeaways
+
+- CTI is a **cycle**, not a linear process — feedback drives improvement
+- **Direction** first — without scope, collection is noise
+- **Four types of intel** (strategic, operational, tactical, technical) — serve different audiences
+- Use **TLP** to govern sharing, **PAP** to govern actions
+- **STIX/TAXII** are the standards for automated intel sharing
+- **ISACs** are often the highest-value intel source for your industry
+- **Feedback is mandatory** — without it, CTI becomes noise nobody reads
+- Intelligence answers "so what?" and "now what?" — if it doesn't, it's just data
