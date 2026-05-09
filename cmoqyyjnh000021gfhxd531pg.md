@@ -1,9 +1,9 @@
 ---
 title: "Splunk for Blue Team: SPL Queries and Investigation Patterns"
-datePublished: 2026-05-04T09:00:00.000Z
+datePublished: Mon May 04 2026 09:00:00 GMT+0000 (Coordinated Universal Time)
 cuid: cmoqyyjnh000021gfhxd531pg
 slug: splunk-for-blue-team-spl-queries-and-investigation-patterns
-tags: soc, cybersecurity, splunk, blue-team, siem
+cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thumbnails/splunk-blue-team.png
 
 ---
 
