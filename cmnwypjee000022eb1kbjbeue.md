@@ -9,7 +9,7 @@ cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thu
 
 # Incident Response: The NIST SP 800-61 Lifecycle
 
-Every security incident follows a pattern — and having a playbook makes the difference between containing damage and letting it spread. The NIST SP 800-61r2 lifecycle is the standard framework for incident response (IR). This post covers the full lifecycle, the tools, and what each phase actually looks like in practice.
+Every security incident follows a pattern, and having a playbook makes the difference between containing damage and letting it spread. The NIST SP 800-61r2 lifecycle is the standard framework for incident response (IR). This post covers the full lifecycle, the tools, and what each phase actually looks like in practice.
 
 ---
 
@@ -17,8 +17,8 @@ Every security incident follows a pattern — and having a playbook makes the di
 
 Not every alert is an incident. The distinction matters for resource allocation.
 
-- **Security Event** — routine occurrence handled by SOC analysts (e.g., a single failed login, antivirus blocking a known file)
-- **Security Incident** — confirmed violation requiring specialized response (e.g., active compromise, data exfiltration, ransomware)
+- **Security Event**: routine occurrence handled by SOC analysts (e.g., a single failed login, antivirus blocking a known file)
+- **Security Incident**: confirmed violation requiring specialized response (e.g., active compromise, data exfiltration, ransomware)
 
 The SOC triages events. Incidents get escalated to the CSIRT.
 
@@ -36,14 +36,14 @@ Preparation → Detection & Analysis → Containment → Eradication → Recover
 
 ## Phase 1: Preparation
 
-The foundation. Everything you do before an incident — people, processes, tools.
+The foundation. Everything you do before an incident, people, processes, tools.
 
 ### Key Elements
 
-- **Incident Response Plan (IRP)** — documented procedures, escalation paths, communication templates
-- **CSIRT (Computer Security Incident Response Team)** — cross-functional: security, IT, HR, legal, C-suite, PR
-- **Asset Inventory** — you can't protect what you don't know exists
-- **Risk Assessments** — identify crown jewels and likely attack paths
+- **Incident Response Plan (IRP)**: documented procedures, escalation paths, communication templates
+- **CSIRT (Computer Security Incident Response Team)**: cross-functional: security, IT, HR, legal, C-suite, PR
+- **Asset Inventory**: you can't protect what you don't know exists
+- **Risk Assessments**: identify crown jewels and likely attack paths
 
 ### Preventive Controls
 
@@ -65,12 +65,12 @@ Identifying an incident has occurred and understanding its scope.
 
 ### Detection Sources
 
-- **SIEM alerts** — correlation rules trigger on suspicious patterns
-- **IDS/IPS signatures** — known attack patterns
-- **EDR** — endpoint behavior anomalies
-- **User reports** — "I got a weird email"
-- **Threat intelligence feeds** — IOCs matching known campaigns
-- **Baselines & behavioral profiles** — deviations from normal patterns
+- **SIEM alerts**: correlation rules trigger on suspicious patterns
+- **IDS/IPS signatures**: known attack patterns
+- **EDR**: endpoint behavior anomalies
+- **User reports**: "I got a weird email"
+- **Threat intelligence feeds**: IOCs matching known campaigns
+- **Baselines & behavioral profiles**: deviations from normal patterns
 
 ### Common Events to Investigate
 
@@ -91,7 +91,7 @@ tasklist /svc             # Running processes + services
 schtasks /query /fo LIST  # Scheduled tasks
 ```
 
-Note: `wmic` is deprecated in recent Windows builds (21H1+) — use PowerShell equivalents.
+Note: `wmic` is deprecated in recent Windows builds (21H1+), use PowerShell equivalents.
 
 **PowerShell:**
 ```powershell
@@ -112,7 +112,7 @@ PowerShell module for rapid Windows Event Log analysis. Detects:
 - Password spraying / brute force
 - Pass-the-hash indicators
 
-Run against a `.evtx` file or live system — gives you a fast triage output before deeper forensics.
+Run against a `.evtx` file or live system, gives you a fast triage output before deeper forensics.
 
 ### Wireshark for Network Analysis
 
@@ -157,17 +157,17 @@ Remove the threat completely.
   - WMI subscriptions
 - Remove malware from all affected systems
 - Close the initial attack vector (patch the vulnerability, disable the exploited feature)
-- Verify eradication — don't assume
+- Verify eradication, don't assume
 
 ### Recovery
 
 Restore normal operations, but do it carefully.
 
-- **Identify root cause** — if you don't know how they got in, they'll be back
-- **Restore from clean backups** — verify the backup wasn't also compromised
-- **Rebuild compromised systems** — don't trust an infected machine, even after "cleaning"
+- **Identify root cause**: if you don't know how they got in, they'll be back
+- **Restore from clean backups**: verify the backup wasn't also compromised
+- **Rebuild compromised systems**: don't trust an infected machine, even after "cleaning"
 - **Reset credentials** for any potentially exposed accounts
-- **Monitor for re-infection** — attackers often try again
+- **Monitor for re-infection**: attackers often try again
 
 ---
 
@@ -177,13 +177,13 @@ The most overlooked phase. Conducted within days of incident closure, while deta
 
 ### Post-Incident Review
 
-- **What went well?** — effective processes, tools, team coordination
-- **What could be improved?** — detection gaps, slow response, communication breakdowns
-- **What should change?** — new detection rules, updated playbooks, additional training
+- **What went well?**: effective processes, tools, team coordination
+- **What could be improved?**: detection gaps, slow response, communication breakdowns
+- **What should change?**: new detection rules, updated playbooks, additional training
 
 ### Documentation
 
-Maintain detailed records throughout the incident — not just at the end. Documentation supports:
+Maintain detailed records throughout the incident, not just at the end. Documentation supports:
 
 - Legal proceedings
 - Compliance requirements
@@ -206,11 +206,11 @@ Maintain detailed records throughout the incident — not just at the end. Docum
 
 A proper IR report includes:
 
-1. **Executive Summary** — for leadership, non-technical
-2. **Incident Timeline** — chronological events
-3. **Technical Details** — IOCs, TTPs, affected systems
-4. **Impact Assessment** — data, systems, business impact
-5. **Recommendations** — what to change, what to invest in
+1. **Executive Summary**: for leadership, non-technical
+2. **Incident Timeline**: chronological events
+3. **Technical Details**: IOCs, TTPs, affected systems
+4. **Impact Assessment**: data, systems, business impact
+5. **Recommendations**: what to change, what to invest in
 
 ---
 
@@ -218,7 +218,7 @@ A proper IR report includes:
 
 Tracking multiple concurrent incidents manually doesn't scale. Case management platforms help.
 
-**TheHive** — open-source IR platform:
+**TheHive**: open-source IR platform:
 
 - Case/task management
 - Observable analysis (IPs, hashes, URLs, files)
@@ -230,7 +230,7 @@ Tracking multiple concurrent incidents manually doesn't scale. Case management p
 
 ## IR Meets MITRE ATT&CK
 
-MITRE ATT&CK maps adversary tactics and techniques — a shared vocabulary for describing what attackers do.
+MITRE ATT&CK maps adversary tactics and techniques, a shared vocabulary for describing what attackers do.
 
 **The 14 Enterprise tactics:**
 
@@ -253,11 +253,11 @@ During IR, map observed adversary behavior to ATT&CK techniques. This helps:
 
 ## Key Takeaways
 
-- IR is a **lifecycle**, not a one-time event — the four phases repeat and improve
+- IR is a **lifecycle**, not a one-time event, the four phases repeat and improve
 - **Preparation** determines how much the other phases hurt
-- **Always image before eradication** — you can't unburn evidence
-- **Root cause matters** — without it, the attacker comes back
-- **Document everything** — not just at the end, throughout
-- **Lessons Learned is not optional** — it's where improvement happens
+- **Always image before eradication**: you can't unburn evidence
+- **Root cause matters**: without it, the attacker comes back
+- **Document everything**: not just at the end, throughout
+- **Lessons Learned is not optional**: it's where improvement happens
 - Use **MITRE ATT&CK** as a shared language for TTPs
 - **Metrics (MTTD, MTTR)** prove value and identify bottlenecks
