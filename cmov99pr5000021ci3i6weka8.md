@@ -1,9 +1,9 @@
 ---
 title: "Elastic SIEM and KQL: The Open-Source Alternative to Splunk"
-datePublished: 2026-05-07T09:00:00.000Z
+datePublished: Thu May 07 2026 09:00:00 GMT+0000 (Coordinated Universal Time)
 cuid: cmov99pr5000021ci3i6weka8
 slug: elastic-siem-and-kql-the-open-source-alternative-to-splunk
-tags: kibana, cybersecurity, blue-team, siem, elastic-siem
+cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thumbnails/elastic-siem-kql.png
 
 ---
 
