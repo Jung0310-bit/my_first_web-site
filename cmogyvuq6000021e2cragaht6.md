@@ -1,9 +1,9 @@
 ---
 title: "Digital Forensics Fundamentals: Evidence to Analysis"
-datePublished: 2026-04-27T09:00:00.000Z
+datePublished: Mon Apr 27 2026 09:00:00 GMT+0000 (Coordinated Universal Time)
 cuid: cmogyvuq6000021e2cragaht6
 slug: digital-forensics-fundamentals-evidence-to-analysis
-tags: cybersecurity, forensics, digital-forensics, blue-team, dfir
+cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thumbnails/digital-forensics-fundamentals.png
 
 ---
 
