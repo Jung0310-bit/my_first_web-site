@@ -19,7 +19,7 @@ Three core components:
 
 | Component | Role |
 |-----------|------|
-| **Splunk Forwarder** | Lightweight agent on endpoints — collects and forwards data |
+| **Splunk Forwarder** | Lightweight agent on endpoints, collects and forwards data |
 | **Splunk Indexer** | Processes incoming data, normalizes into field-value pairs, stores as searchable events |
 | **Splunk Search Head** | User interface (Search & Reporting App) for queries, visualizations, alerts |
 
@@ -43,9 +43,9 @@ index="botsv1" earliest=0
 index="botsv1" sourcetype="stream:http" http_method=POST
 ```
 
-- `index=` — selects the dataset (e.g., `main`, `security`, `botsv1`)
-- `sourcetype=` — filters by log type
-- `earliest=0` — starts from the first event (avoids needing "All Time" picker)
+- `index=`, selects the dataset (e.g., `main`, `security`, `botsv1`)
+- `sourcetype=`, filters by log type
+- `earliest=0`, starts from the first event (avoids needing "All Time" picker)
 
 **Tip:** Use **Event Sampling** (1:100) during query development. It lets you test queries on a subset without straining the indexers.
 
@@ -61,11 +61,11 @@ index="botsv1" sourcetype="stream:http" http_method=POST
 
 Splunk extracts fields from raw log data. Common fields:
 
-- `host` — originating system
-- `source` — file or data source
-- `sourcetype` — data format type
-- `src_ip`, `dest_ip` — network source/destination
-- `Image` — Sysmon process executable
+- `host`, originating system
+- `source`, file or data source
+- `sourcetype`, data format type
+- `src_ip`, `dest_ip`, network source/destination
+- `Image`, Sysmon process executable
 
 ---
 
@@ -104,7 +104,7 @@ Splunk extracts fields from raw log data. Common fields:
 
 ## Investigation Pattern: Process Analysis
 
-A classic pattern — find all processes executed by a specific image and group by host:
+A classic pattern, find all processes executed by a specific image and group by host:
 
 ```spl
 index="botsv1" earliest=0 Image="*\\cmd.exe" 
@@ -184,7 +184,7 @@ index="botsv1" sourcetype=xmlwineventlog osk.exe
 | table _time, host, User, Image, CommandLine
 ```
 
-Check the `Image` field — `osk.exe` (On-Screen Keyboard) should live in `C:\Windows\System32\`. If it's running from `C:\Users\Public\` or `C:\Temp\`, that's suspicious.
+Check the `Image` field, `osk.exe` (On-Screen Keyboard) should live in `C:\Windows\System32\`. If it's running from `C:\Users\Public\` or `C:\Temp\`, that's suspicious.
 
 **General pattern for binary location hunting:**
 ```spl
@@ -193,7 +193,7 @@ index="botsv1" sourcetype=xmlwineventlog EventCode=1
 | search IsSystem32=no AND Image IN ("*\\svchost.exe", "*\\lsass.exe", "*\\winlogon.exe")
 ```
 
-This flags Windows system binaries running outside System32 — a strong indicator of malware impersonation.
+This flags Windows system binaries running outside System32, a strong indicator of malware impersonation.
 
 ---
 
@@ -206,7 +206,7 @@ index=* sourceIPAddress=* "requestParameters.bucketName"="developers-configurati
 | table _time, eventName, sourceIPAddress, userAgent, userIdentity.userName
 ```
 
-Filter by `userAgent` to distinguish CLI access from browser access — attackers typically use the AWS CLI or SDK, which leaves a different User-Agent than a human using the console.
+Filter by `userAgent` to distinguish CLI access from browser access, attackers typically use the AWS CLI or SDK, which leaves a different User-Agent than a human using the console.
 
 ---
 
@@ -233,10 +233,10 @@ Alerts run a saved search on a schedule or in real-time and trigger when results
 
 ### Alert Components
 
-1. **Search Query** — the SPL that detects the activity
-2. **Search Timing** — real-time or scheduled (every N minutes/hours)
-3. **Trigger Condition** — threshold (e.g., `count > 5`, `per-result`)
-4. **Alert Action** — email, webhook, add to triggered alerts list, log event
+1. **Search Query**: the SPL that detects the activity
+2. **Search Timing**: real-time or scheduled (every N minutes/hours)
+3. **Trigger Condition**: threshold (e.g., `count > 5`, `per-result`)
+4. **Alert Action**: email, webhook, add to triggered alerts list, log event
 
 ### Example: Failed Login Spike Alert
 
@@ -279,11 +279,11 @@ Dashboards can be powered by inline searches or reference saved Reports. Reports
 
 ## SPL Tips
 
-- **Use `earliest=0`** instead of "All Time" picker — faster query parsing
-- **Filter first, then transform** — put `search` and `where` early, `stats` late
-- **Use `tstats` for fast queries** on accelerated data models — much faster than `stats`
+- **Use `earliest=0`** instead of "All Time" picker, faster query parsing
+- **Filter first, then transform**: put `search` and `where` early, `stats` late
+- **Use `tstats` for fast queries** on accelerated data models, much faster than `stats`
 - **`| fields + X Y Z`** early in the query makes downstream commands faster
-- **Avoid `*` wildcards at the start** of a value (`*evil.com`) — they're much slower than end wildcards (`evil.*`)
+- **Avoid `*` wildcards at the start** of a value (`*evil.com`), they're much slower than end wildcards (`evil.*`)
 - **Use `lookup` tables** for enrichment instead of inline `case` statements
 
 ---
@@ -291,12 +291,12 @@ Dashboards can be powered by inline searches or reference saved Reports. Reports
 ## Key Takeaways
 
 - Splunk = **Forwarder → Indexer → Search Head**
-- **SPL uses pipes** — chain commands like Unix shell
-- **Filter first, transform last** — put `search`/`where` before `stats`
-- `stats` is the workhorse — `stats count by <field>` is the most common pattern
+- **SPL uses pipes**: chain commands like Unix shell
+- **Filter first, transform last**: put `search`/`where` before `stats`
+- `stats` is the workhorse, `stats count by <field>` is the most common pattern
 - **`pstree`-like patterns** work in Splunk via `ParentImage`/`Image` correlation
 - **Brute-force detection** is a `count by src_ip` + threshold
 - **Binary location checks** catch malware impersonation of system files
 - **Use `earliest=0`** to avoid time-picker overhead
 - Alerts = saved search + schedule + trigger + action
-- Dashboards consume saved reports — reuse, don't duplicate
+- Dashboards consume saved reports, reuse, don't duplicate
