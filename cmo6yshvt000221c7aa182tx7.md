@@ -33,7 +33,7 @@ Define what you're looking for and why. Without this, you drown in data.
 - What assets and business processes need protection?
 - What's the potential impact if they're compromised?
 - What data sources and tools do we need?
-- Who consumes this intelligence — analysts, SOC, executives?
+- Who consumes this intelligence, analysts, SOC, executives?
 
 **Example objectives:**
 - Research a specific APT group targeting your sector
@@ -47,7 +47,7 @@ The direction phase scopes everything downstream. Bad direction = wasted collect
 
 ## Phase 2: Collection
 
-Gather data from diverse sources. Variety matters — a single source is a blind spot.
+Gather data from diverse sources. Variety matters, a single source is a blind spot.
 
 ### Internal Sources
 - Security events and logs
@@ -57,15 +57,15 @@ Gather data from diverse sources. Variety matters — a single source is a blind
 - EDR telemetry
 
 ### OSINT (Open Source)
-- **Threat feeds** — Spamhaus, URLhaus, AlienVault OTX, SANS ISC
-- **Government alerts** — CISA (US, absorbed US-CERT in 2023), NCSC (UK), ACSC (Australia)
-- **Social media** — Twitter/X, Reddit, Mastodon infosec community
-- **Vendor blogs** — Mandiant, CrowdStrike, Microsoft threat intel
+- **Threat feeds**: Spamhaus, URLhaus, AlienVault OTX, SANS ISC
+- **Government alerts**: CISA (US, absorbed US-CERT in 2023), NCSC (UK), ACSC (Australia)
+- **Social media**: Twitter/X, Reddit, Mastodon infosec community
+- **Vendor blogs**: Mandiant, CrowdStrike, Microsoft threat intel
 - **Research papers**
 
 ### Paid Intelligence
 - Mandiant, Recorded Future, CrowdStrike, Flashpoint, Intel471
-- More curated, less noise, faster updates — but expensive
+- More curated, less noise, faster updates, but expensive
 
 ### Community
 - ISACs (Information Sharing and Analysis Centers)
@@ -86,10 +86,10 @@ Transform raw data into a usable format.
 
 - Extract, sort, and correlate raw data from logs, malware samples, network traffic
 - **Translate** non-English sources (dark web forums are often in Russian)
-- **Deduplicate** — multiple feeds often report the same IOC
-- **Normalize** — standardize formats (IP vs CIDR, domain vs URL)
+- **Deduplicate**: multiple feeds often report the same IOC
+- **Normalize**: standardize formats (IP vs CIDR, domain vs URL)
 - **Tag** data by type, source, confidence
-- **Enrich** — add WHOIS data, geolocation, VirusTotal reputation
+- **Enrich**: add WHOIS data, geolocation, VirusTotal reputation
 
 SIEMs and TIPs handle most of this automatically if configured well.
 
@@ -99,10 +99,10 @@ SIEMs and TIPs handle most of this automatically if configured well.
 
 Convert processed information into actionable intelligence. This is where human expertise matters.
 
-- **Identify patterns** — indicators, attack chains, infrastructure reuse
-- **Build action plans** — prevention, detection, response recommendations
-- **Justify investments** — data supporting additional security resources
-- **Tailor presentation** — technical detail for analysts, high-level summary for executives
+- **Identify patterns**: indicators, attack chains, infrastructure reuse
+- **Build action plans**: prevention, detection, response recommendations
+- **Justify investments**: data supporting additional security resources
+- **Tailor presentation**: technical detail for analysts, high-level summary for executives
 
 The output of analysis is **intelligence**, not data. Intelligence answers "so what?" and "now what?"
 
@@ -131,13 +131,13 @@ Deliver the right intelligence to the right people in the right format.
 
 ## Phase 6: Feedback
 
-This is the phase most teams skip — and it's what makes CTI actually improve.
+This is the phase most teams skip, and it's what makes CTI actually improve.
 
-- **Collect stakeholder responses** — was the intelligence useful? actionable? timely?
-- **Guide future collection** — what data should we gather more of?
-- **Improve processing** — are we missing context? over-filtering?
-- **Adjust analysis** — is the confidence assessment accurate?
-- **Refine dissemination** — right audience? right format?
+- **Collect stakeholder responses**: was the intelligence useful? actionable? timely?
+- **Guide future collection**: what data should we gather more of?
+- **Improve processing**: are we missing context? over-filtering?
+- **Adjust analysis**: is the confidence assessment accurate?
+- **Refine dissemination**: right audience? right format?
 
 Feedback maintains the cycle. Without it, CTI becomes a one-way broadcast nobody listens to.
 
@@ -150,7 +150,7 @@ Not all CTI is the same. Different types serve different audiences.
 | Type | Audience | Focus | Example |
 |------|----------|-------|---------|
 | **Strategic** | Executives, board | High-level trends, geopolitics, risk landscape | "Ransomware attacks against healthcare increased 50% in Q1" |
-| **Operational** | Threat intel analysts | Threat actor motivations, TTPs, campaigns | "APT33 is targeting aviation — here's their current infrastructure" |
+| **Operational** | Threat intel analysts | Threat actor motivations, TTPs, campaigns | "APT33 is targeting aviation, here's their current infrastructure" |
 | **Tactical** | SOC analysts, defenders | Technical IOCs for immediate defense | List of malicious IPs for firewall blocklist |
 | **Technical** | Incident response | Attack artifacts, malware samples | Specific exploit code, YARA rules, malware hashes |
 
@@ -191,8 +191,8 @@ TLP and PAP together answer: who can see this, and what can they do with it.
 
 ## IOC Sharing Formats
 
-- **STIX** (Structured Threat Information eXpression) — standardized language for describing IOCs, TTPs, motivations, and relationships
-- **TAXII** (Trusted Automated eXchange of Intelligence Information) — the transport protocol for sharing STIX data
+- **STIX** (Structured Threat Information eXpression), standardized language for describing IOCs, TTPs, motivations, and relationships
+- **TAXII** (Trusted Automated eXchange of Intelligence Information), the transport protocol for sharing STIX data
 
 Together they enable automated, machine-readable threat intelligence sharing.
 
@@ -223,10 +223,10 @@ Most teams debate this. The honest answer:
 **Information Sharing and Analysis Centers** are industry-specific groups where organizations share IOCs, attack details, and trends.
 
 Examples:
-- **FS-ISAC** — Financial Services
-- **Aviation ISAC** — Aviation
-- **H-ISAC** — Healthcare
-- **E-ISAC** — Electricity
+- **FS-ISAC**: Financial Services
+- **Aviation ISAC**: Aviation
+- **H-ISAC**: Healthcare
+- **E-ISAC**: Electricity
 
 Joining your sector's ISAC is usually the highest-value threat intel move you can make.
 
@@ -234,11 +234,11 @@ Joining your sector's ISAC is usually the highest-value threat intel move you ca
 
 ## Key Takeaways
 
-- CTI is a **cycle**, not a linear process — feedback drives improvement
-- **Direction** first — without scope, collection is noise
-- **Four types of intel** (strategic, operational, tactical, technical) — serve different audiences
+- CTI is a **cycle**, not a linear process, feedback drives improvement
+- **Direction** first, without scope, collection is noise
+- **Four types of intel** (strategic, operational, tactical, technical), serve different audiences
 - Use **TLP** to govern sharing, **PAP** to govern actions
 - **STIX/TAXII** are the standards for automated intel sharing
 - **ISACs** are often the highest-value intel source for your industry
-- **Feedback is mandatory** — without it, CTI becomes noise nobody reads
-- Intelligence answers "so what?" and "now what?" — if it doesn't, it's just data
+- **Feedback is mandatory**: without it, CTI becomes noise nobody reads
+- Intelligence answers "so what?" and "now what?", if it doesn't, it's just data
