@@ -9,7 +9,7 @@ cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thu
 
 # Elastic SIEM and KQL: The Open-Source Alternative to Splunk
 
-Splunk is powerful but expensive. Elastic Stack (formerly ELK) is the open-source alternative most teams eventually encounter. This post covers the Elastic architecture, ECS (Elastic Common Schema), KQL queries, and the Kibana interface — enough to get productive as a blue teamer.
+Splunk is powerful but expensive. Elastic Stack (formerly ELK) is the open-source alternative most teams eventually encounter. This post covers the Elastic architecture, ECS (Elastic Common Schema), KQL queries, and the Kibana interface, enough to get productive as a blue teamer.
 
 ---
 
@@ -17,7 +17,7 @@ Splunk is powerful but expensive. Elastic Stack (formerly ELK) is the open-sourc
 
 | Component | Role |
 |-----------|------|
-| **Elasticsearch** | Distributed search and analytics engine — stores and indexes log data |
+| **Elasticsearch** | Distributed search and analytics engine, stores and indexes log data |
 | **Kibana** | Web-based UI for searching, visualizing, and managing data |
 | **Beats** | Lightweight data shippers on endpoints (Filebeat, Winlogbeat, Packetbeat) |
 | **Logstash** | Server-side data processing pipeline for parsing, transforming, enriching logs |
@@ -35,14 +35,14 @@ Logstash is optional. For simpler deployments, Beats can write directly to Elast
 
 Different Beats for different data types:
 
-- **Filebeat** — log files
-- **Winlogbeat** — Windows Event Logs
-- **Packetbeat** — network traffic
-- **Metricbeat** — system and service metrics
-- **Auditbeat** — Linux audit framework
-- **Heartbeat** — uptime monitoring
+- **Filebeat**: log files
+- **Winlogbeat**: Windows Event Logs
+- **Packetbeat**: network traffic
+- **Metricbeat**: system and service metrics
+- **Auditbeat**: Linux audit framework
+- **Heartbeat**: uptime monitoring
 
-Or use the **Elastic Agent** — a single agent that handles everything, managed via Fleet.
+Or use the **Elastic Agent**: a single agent that handles everything, managed via Fleet.
 
 ---
 
@@ -52,8 +52,8 @@ This is the feature that makes Elastic useful in practice.
 
 ECS is a standardized field naming convention that ensures consistency across data sources. Without it, different log sources use different names for the same thing:
 
-- `src_ip` vs `source_address` vs `client.ip` — all mean the same thing
-- `user` vs `username` vs `account_name` — same concept, different fields
+- `src_ip` vs `source_address` vs `client.ip`, all mean the same thing
+- `user` vs `username` vs `account_name`, same concept, different fields
 
 ECS normalizes these.
 
@@ -76,7 +76,7 @@ With ECS, you can write one query that works across all data sources:
 source.ip: "192.168.1.100"
 ```
 
-This finds every event involving that IP — Windows logs, firewall logs, Sysmon, web server logs — without caring what the original field name was.
+This finds every event involving that IP, Windows logs, firewall logs, Sysmon, web server logs, without caring what the original field name was.
 
 ---
 
@@ -94,12 +94,12 @@ process.name: "powershell.exe" AND NOT user.name: "SYSTEM"
 
 ### Key Features
 
-- **Field-based queries** — `field: value`
-- **Wildcards** — `source.ip: 10.0.*` matches any IP starting with 10.0
-- **Boolean operators** — `AND`, `OR`, `NOT`
-- **Ranges** — `@timestamp > "2026-01-01"`
-- **Existence check** — `process.name: *` (field exists)
-- **Free-text search** — search all fields without specifying
+- **Field-based queries**: `field: value`
+- **Wildcards**: `source.ip: 10.0.*` matches any IP starting with 10.0
+- **Boolean operators**: `AND`, `OR`, `NOT`
+- **Ranges**: `@timestamp > "2026-01-01"`
+- **Existence check**: `process.name: *` (field exists)
+- **Free-text search**: search all fields without specifying
 
 ### KQL vs Splunk SPL
 
@@ -170,7 +170,7 @@ event.action: "logon-failed" AND source.ip: 10.0.2.*
 Then in Kibana Discover:
 1. Add columns: `@timestamp`, `user.name`, `source.ip`, `host.name`
 2. Sort by timestamp
-3. Look for patterns — same IP hitting multiple accounts, or same account from multiple IPs
+3. Look for patterns, same IP hitting multiple accounts, or same account from multiple IPs
 4. Pivot to other events from the same IP
 
 ---
@@ -213,7 +213,7 @@ event.action: "service-installed" AND
 (winlog.event_data.ServiceName: "PSEXESVC" OR winlog.event_data.ServiceFileName: *PSEXESVC*)
 ```
 
-PsExec leaves a service installation trail. Hunt for it specifically — or use `winlog.event_data.ServiceName: *` to see all recently installed services and spot anomalies.
+PsExec leaves a service installation trail. Hunt for it specifically, or use `winlog.event_data.ServiceName: *` to see all recently installed services and spot anomalies.
 
 ---
 
@@ -259,10 +259,10 @@ The SIEM app is free with the base Elastic Stack. The paid tier adds advanced fe
 
 ## Tips for Working with Elastic
 
-- **Use ECS fields when available** — your queries work across data sources
-- **Save searches and visualizations** — reuse, don't rewrite
-- **Use filters instead of KQL when possible** — filters are cached and faster
-- **Use `@timestamp` range explicitly** — avoid scanning all data
+- **Use ECS fields when available**: your queries work across data sources
+- **Save searches and visualizations**: reuse, don't rewrite
+- **Use filters instead of KQL when possible**: filters are cached and faster
+- **Use `@timestamp` range explicitly**: avoid scanning all data
 - **Take advantage of runtime fields** for ad-hoc calculations without reindexing
 - **Alias fields** when onboarding new data sources that don't match ECS
 - **Use Data Views** to control which indices Kibana searches
@@ -272,7 +272,7 @@ The SIEM app is free with the base Elastic Stack. The paid tier adds advanced fe
 ## Key Takeaways
 
 - Elastic = **Beats → (Logstash) → Elasticsearch → Kibana**
-- **ECS** is what makes Elastic useful — standardized field names
+- **ECS** is what makes Elastic useful, standardized field names
 - **KQL** is simpler than SPL, better for filtering
 - **Discover** is for raw data, **Visualize** for charts, **Dashboards** for views
 - **Fleet** for managing agents at scale
