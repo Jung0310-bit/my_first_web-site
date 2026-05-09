@@ -1,9 +1,9 @@
 ---
 title: "Cyber Threat Intelligence Lifecycle: From Raw Data to Actionable Intel"
-datePublished: 2026-04-20T09:00:00.000Z
+datePublished: Mon Apr 20 2026 09:00:00 GMT+0000 (Coordinated Universal Time)
 cuid: cmo6yshvt000221c7aa182tx7
 slug: cyber-threat-intelligence-lifecycle-from-raw-data-to-actionable-intel
-tags: infosec, cybersecurity, blue-team, cti, threat-intelligence
+cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thumbnails/cti-lifecycle.png
 
 ---
 
