@@ -9,7 +9,7 @@ cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thu
 
 # Digital Forensics Fundamentals: Evidence to Analysis
 
-Digital forensics is the part of blue team work where mistakes are permanent. Modify a disk, lose a memory snapshot, break the chain of custody — evidence becomes inadmissible. This post covers the fundamentals: the forensic process, evidence collection, order of volatility, and the tools that actually work.
+Digital forensics is the part of blue team work where mistakes are permanent. Modify a disk, lose a memory snapshot, break the chain of custody, evidence becomes inadmissible. This post covers the fundamentals: the forensic process, evidence collection, order of volatility, and the tools that actually work.
 
 ---
 
@@ -22,7 +22,7 @@ Digital forensics is the scientific examination of digital devices and data to u
 - Network traffic
 - Volatile memory (RAM)
 
-When combined with Incident Response, the discipline is **DFIR** — Digital Forensics and Incident Response.
+When combined with Incident Response, the discipline is **DFIR**: Digital Forensics and Incident Response.
 
 ---
 
@@ -30,11 +30,11 @@ When combined with Incident Response, the discipline is **DFIR** — Digital For
 
 Every forensic investigation follows the same steps.
 
-1. **Identification** — locate potential evidence sources, custodians, data locations
-2. **Preservation** — protect ESI (Electronically Stored Information), prevent tampering
-3. **Collection** — acquire evidence through imaging, copying, or capturing
-4. **Analysis** — systematically examine artifacts to uncover findings
-5. **Reporting** — produce detailed, reproducible reports
+1. **Identification**: locate potential evidence sources, custodians, data locations
+2. **Preservation**: protect ESI (Electronically Stored Information), prevent tampering
+3. **Collection**: acquire evidence through imaging, copying, or capturing
+4. **Analysis**: systematically examine artifacts to uncover findings
+5. **Reporting**: produce detailed, reproducible reports
 
 The order matters. You can't analyze what you didn't preserve.
 
@@ -44,11 +44,11 @@ The order matters. You can't analyze what you didn't preserve.
 
 Collect evidence from most volatile to least volatile. Everything higher in this list disappears faster.
 
-1. **Registers & Cache** — most volatile, changes constantly (rarely captured)
-2. **Memory (RAM)** — active processes, network connections, encryption keys
-3. **Disk (HDD/SSD)** — persistent but can be overwritten (SSD TRIM)
-4. **Remote Logging** — log rotation may cause data loss
-5. **Physical Configuration** — least volatile
+1. **Registers & Cache**: most volatile, changes constantly (rarely captured)
+2. **Memory (RAM)**: active processes, network connections, encryption keys
+3. **Disk (HDD/SSD)**: persistent but can be overwritten (SSD TRIM)
+4. **Remote Logging**: log rotation may cause data loss
+5. **Physical Configuration**: least volatile
 
 **Practical order:**
 ```
@@ -65,9 +65,9 @@ Memory first because it's gone the moment the system powers off.
 
 Three factors when choosing a tool:
 
-- **Footprint** — smaller is better (less chance of overwriting evidence in RAM)
-- **Mode** — kernel-mode tools access more memory and bypass anti-debugging
-- **Speed** — faster acquisition reduces the chance of memory state changing mid-capture
+- **Footprint**: smaller is better (less chance of overwriting evidence in RAM)
+- **Mode**: kernel-mode tools access more memory and bypass anti-debugging
+- **Speed**: faster acquisition reduces the chance of memory state changing mid-capture
 
 ### Common Tools
 
@@ -82,16 +82,16 @@ Three factors when choosing a tool:
 1. `File → Capture Memory`
 2. Choose save location
 3. Optionally include pagefile
-4. Run — wait for completion
+4. Run, wait for completion
 5. Analyze with **Volatility**
 
 ### Dead Acquisition (System Powered Off)
 
 When RAM is unavailable, partial memory data may exist in:
 
-- **hiberfil.sys** — full RAM snapshot from hibernation (size ≈ RAM size)
-- **pagefile.sys** — paged-out RAM data (partial, may contain credentials/artifacts)
-- **C:\Windows\MEMORY.DMP** — memory state at time of BSOD
+- **hiberfil.sys**: full RAM snapshot from hibernation (size ≈ RAM size)
+- **pagefile.sys**: paged-out RAM data (partial, may contain credentials/artifacts)
+- **C:\Windows\MEMORY.DMP**: memory state at time of BSOD
 
 ### Linux Memory Acquisition
 
@@ -115,7 +115,7 @@ When RAM is unavailable, partial memory data may exist in:
 
 ### Powering Off
 
-When removing a disk, **pull the power cable** — don't do a clean shutdown. A clean shutdown modifies timestamps and overwrites files. Pulling power preserves the state.
+When removing a disk, **pull the power cable**: don't do a clean shutdown. A clean shutdown modifies timestamps and overwrites files. Pulling power preserves the state.
 
 ### Full Disk Imaging Workflow
 
@@ -135,7 +135,7 @@ dd if=/dev/sda of=/mnt/evidence/sda.dd bs=4M conv=noerror,sync status=progress
 dd if=/dev/sda | tee /mnt/evidence/sda.dd | sha256sum
 ```
 
-Forensic tools like EnCase and FTK add metadata and chain of custody info automatically — prefer those when acquiring for legal use.
+Forensic tools like EnCase and FTK add metadata and chain of custody info automatically, prefer those when acquiring for legal use.
 
 ### Image Formats
 
@@ -154,13 +154,13 @@ Full disk imaging takes hours. Multi-TB drives take days. When you're under time
 
 ### Key Windows Artifacts to Collect
 
-- **Event logs** — `%WinDir%\System32\winevt\Logs`
-- **Registry hives** — SAM, SYSTEM, SOFTWARE, DEFAULT, NTUSER.DAT, USRCLASS.DAT, Amcache.hve
-- **Memory artifacts** — pagefile.sys, hiberfil.sys, CrashDumps
-- **User profiles** — `C:\Users\<username>`
-- **File system artifacts** — `$MFT`, `$UsnJrnl`
-- **Prefetch** — evidence of program execution
-- **Browser data** — history, cache, cookies
+- **Event logs**: `%WinDir%\System32\winevt\Logs`
+- **Registry hives**: SAM, SYSTEM, SOFTWARE, DEFAULT, NTUSER.DAT, USRCLASS.DAT, Amcache.hve
+- **Memory artifacts**: pagefile.sys, hiberfil.sys, CrashDumps
+- **User profiles**: `C:\Users\<username>`
+- **File system artifacts**: `$MFT`, `$UsnJrnl`
+- **Prefetch**: evidence of program execution
+- **Browser data**: history, cache, cookies
 - **Recycle Bin**
 
 ### KAPE (Kroll Artifact Parser and Extractor)
@@ -183,8 +183,8 @@ kape.exe --tsource C: --target KapeTriage --tdest D:\evidence\
 
 After acquisition, you need to analyze the image without modifying it.
 
-- **Arsenal Image Mounter** — supports raw, E01, AFF4, VHD, VMDK. Has "Write temporary" mode for safe analysis.
-- **FTK Imager** — can also mount and browse images
+- **Arsenal Image Mounter**: supports raw, E01, AFF4, VHD, VMDK. Has "Write temporary" mode for safe analysis.
+- **FTK Imager**: can also mount and browse images
 - Note: host OS must support the image's filesystem (ext4 images need extra utilities on Windows)
 
 ---
@@ -207,10 +207,10 @@ Generate hashes **before and after** any handling to confirm no changes.
 
 Log every step:
 
-- **What** — the evidence item
-- **When** — date and time
-- **Where** — physical or logical location
-- **Who** — the person handling it
+- **What**: the evidence item
+- **When**: date and time
+- **Where**: physical or logical location
+- **Who**: the person handling it
 
 Record all transfers, acquisitions, examiner details, storage procedures. Use tamper-proof bags, labels, and photographs. Keep evidence locked; only authorized personnel access it.
 
@@ -219,7 +219,7 @@ Record all transfers, acquisitions, examiner details, storage procedures. Use ta
 The four UK Association of Chief Police Officers principles that govern digital evidence handling:
 
 1. **Do not change data** on a digital device that could be evidence
-2. **Access by competent individuals only** — and they must explain their actions
+2. **Access by competent individuals only**: and they must explain their actions
 3. **Maintain a reproducible audit trail** of all procedures
 4. **Lead investigator ensures** all guidelines are followed
 
@@ -232,8 +232,8 @@ These exist because forensic evidence has to survive court challenges.
 A properly equipped forensic kit includes:
 
 - **Forensic workstation** (CAINE, DEFT, or custom)
-- **Hardware write-blockers** — including specialized ones for phones, IoT
-- **Blank hard drives** — at least the size of the original
+- **Hardware write-blockers**: including specialized ones for phones, IoT
+- **Blank hard drives**: at least the size of the original
 - **Electrostatic evidence bags** and tamper-proof stickers
 - **Grounding bracelets** (ESD protection)
 - **Faraday bags/boxes** (signal blocking for mobile devices)
@@ -254,7 +254,7 @@ Digital forensics breaks down into several specializations:
 | **Mobile Forensics** | Phones, tablets, IoT devices |
 | **Cloud Forensics** | AWS/Azure/GCP logs, cloud storage, containers |
 
-Each has its own tools and methodologies — but they all share the fundamentals above.
+Each has its own tools and methodologies, but they all share the fundamentals above.
 
 ---
 
@@ -275,12 +275,12 @@ Each has its own tools and methodologies — but they all share the fundamentals
 ## Key Takeaways
 
 - Digital forensics = **Identification → Preservation → Collection → Analysis → Reporting**
-- **Order of Volatility** — memory first, disk last
-- **Pull power, don't clean shutdown** — timestamps matter
+- **Order of Volatility**: memory first, disk last
+- **Pull power, don't clean shutdown**: timestamps matter
 - Always use **write-blockers** during acquisition
-- **Hash before and after** — prove evidence integrity
-- **Chain of custody** is everything — document who touched what, when
+- **Hash before and after**: prove evidence integrity
+- **Chain of custody** is everything, document who touched what, when
 - **Triage imaging** (via KAPE) when full imaging isn't practical
-- **Two hashes are better than one** — MD5 + SHA256 minimum
+- **Two hashes are better than one**: MD5 + SHA256 minimum
 - ACPO principles exist because evidence has to survive court
 - Every sub-domain shares the same fundamentals
