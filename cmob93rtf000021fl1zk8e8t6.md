@@ -1,9 +1,9 @@
 ---
 title: "Kill Chain, Diamond Model, Pyramid of Pain: Three Frameworks Every Blue Teamer Should Know"
-datePublished: 2026-04-23T09:00:00.000Z
+datePublished: Thu Apr 23 2026 09:00:00 GMT+0000 (Coordinated Universal Time)
 cuid: cmob93rtf000021fl1zk8e8t6
 slug: kill-chain-diamond-model-pyramid-of-pain-three-frameworks-every-blue-teamer-should-know
-tags: cybersecurity, blue-team, threat-intelligence, diamond-model, kill-chain
+cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thumbnails/kill-chain-diamond-pyramid.png
 
 ---
 
