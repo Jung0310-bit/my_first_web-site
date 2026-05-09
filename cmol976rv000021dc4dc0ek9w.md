@@ -1,9 +1,9 @@
 ---
 title: "Memory Forensics with Volatility: Finding What Attackers Hide in RAM"
-datePublished: 2026-04-30T09:00:00.000Z
+datePublished: Thu Apr 30 2026 09:00:00 GMT+0000 (Coordinated Universal Time)
 cuid: cmol976rv000021dc4dc0ek9w
 slug: memory-forensics-with-volatility-finding-what-attackers-hide-in-ram
-tags: cybersecurity, blue-team, volatility, dfir, memory-forensics
+cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thumbnails/memory-forensics-volatility.png
 
 ---
 
