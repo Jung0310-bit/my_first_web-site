@@ -9,7 +9,7 @@ cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thu
 
 # Memory Forensics with Volatility: Finding What Attackers Hide in RAM
 
-Disk forensics misses the stuff that matters most. Fileless malware, running processes, C2 connections, encryption keys, hidden rootkits — these live in RAM and disappear the moment the system powers off. This post covers memory forensics with Volatility, the de facto tool for analyzing memory dumps.
+Disk forensics misses the stuff that matters most. Fileless malware, running processes, C2 connections, encryption keys, hidden rootkits, these live in RAM and disappear the moment the system powers off. This post covers memory forensics with Volatility, the de facto tool for analyzing memory dumps.
 
 ---
 
@@ -17,10 +17,10 @@ Disk forensics misses the stuff that matters most. Fileless malware, running pro
 
 Modern attackers know disk forensics exists. They adapt.
 
-- **Fileless malware** — runs exclusively in memory, no executable on disk
-- **Volatile data** — processes, network connections, credentials, encryption keys — all lost on shutdown
-- **Rootkits** — hide from Task Manager, Process Explorer, even the OS API
-- **Speed** — memory dumps are smaller than disk images; faster to acquire and analyze
+- **Fileless malware**: runs exclusively in memory, no executable on disk
+- **Volatile data**: processes, network connections, credentials, encryption keys, all lost on shutdown
+- **Rootkits**: hide from Task Manager, Process Explorer, even the OS API
+- **Speed**: memory dumps are smaller than disk images; faster to acquire and analyze
 
 If you're only doing disk forensics, you're missing half the picture.
 
@@ -112,21 +112,21 @@ vol.py -f dump.mem --profile=Win7SP1x64 psxview
 
 ### 4. Identify Anomalies
 
-**Singleton violations** — core Windows processes should only have one instance:
+**Singleton violations**: core Windows processes should only have one instance:
 
-- `lsass.exe` — one instance only
-- `services.exe` — one instance only
-- `wininit.exe` — one instance only
-- `csrss.exe` — one per session
+- `lsass.exe`, one instance only
+- `services.exe`, one instance only
+- `wininit.exe`, one instance only
+- `csrss.exe`, one per session
 
 Duplicates suggest malware impersonation.
 
-**Suspicious paths** — legitimate Windows processes run from specific locations:
+**Suspicious paths**: legitimate Windows processes run from specific locations:
 
 - `lsass.exe` must be in `C:\Windows\System32\`
 - Not `C:\Users\Public\`, not `C:\Temp\`
 
-**Code injection** — use `malfind` to detect injected code:
+**Code injection**: use `malfind` to detect injected code:
 
 ```bash
 vol.py -f dump.mem --profile=Win7SP1x64 malfind
@@ -176,12 +176,12 @@ vol.py -f dump.mem --profile=Win7SP1x64 printkey -K "SOFTWARE\Microsoft\Windows\
 
 **Common persistence keys to check:**
 
-- `SOFTWARE\Microsoft\Windows\CurrentVersion\Run` — Run keys
-- `SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce` — RunOnce keys
-- `SYSTEM\CurrentControlSet\Services` — Service persistence
-- `SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache` — Scheduled tasks
-- `SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon` — `Userinit`, `Shell` hijacking
-- `AppInit_DLLs` — loads malicious DLLs into every process linking User32.dll
+- `SOFTWARE\Microsoft\Windows\CurrentVersion\Run`, Run keys
+- `SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce`, RunOnce keys
+- `SYSTEM\CurrentControlSet\Services`, Service persistence
+- `SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache`, Scheduled tasks
+- `SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon`, `Userinit`, `Shell` hijacking
+- `AppInit_DLLs`, loads malicious DLLs into every process linking User32.dll
 
 Compare against a known-clean baseline to spot malicious additions.
 
@@ -202,7 +202,7 @@ vol.py -f dump.mem --profile=Win7SP1x64 dumpfiles -n --dump-dir=./extracted/
 vol.py -f dump.mem --profile=Win7SP1x64 mftparser
 ```
 
-This gives you file names, timestamps, paths, deletion status — without touching the disk.
+This gives you file names, timestamps, paths, deletion status, without touching the disk.
 
 ---
 
@@ -216,7 +216,7 @@ Even without a memory dump, you might find memory remnants in these files:
 | **hiberfil.sys** | Full RAM snapshot from hibernation; great for dead acquisition |
 | **MEMORY.DMP** | Created during BSOD; partial memory content |
 
-Volatility can analyze `hiberfil.sys` directly — no need to convert it first.
+Volatility can analyze `hiberfil.sys` directly, no need to convert it first.
 
 ---
 
@@ -315,13 +315,13 @@ When you find something suspicious in memory:
 
 ## Key Takeaways
 
-- **Memory forensics catches what disk forensics misses** — fileless malware, live processes, C2 connections
-- **Always acquire memory first** — it's the most volatile
-- **pstree first** — process tree anomalies give you the fastest wins
-- **psxview** is the best hidden process detection — cross-references 7 methods
-- **netscan** to find C2 — look for connections to unknown IPs
-- **malfind** catches injected code — look for `PAGE_EXECUTE_READWRITE` + MZ
-- **printkey** to check persistence — compare against clean baseline
+- **Memory forensics catches what disk forensics misses**: fileless malware, live processes, C2 connections
+- **Always acquire memory first**: it's the most volatile
+- **pstree first**: process tree anomalies give you the fastest wins
+- **psxview** is the best hidden process detection, cross-references 7 methods
+- **netscan** to find C2, look for connections to unknown IPs
+- **malfind** catches injected code, look for `PAGE_EXECUTE_READWRITE` + MZ
+- **printkey** to check persistence, compare against clean baseline
 - **Singleton violations** (duplicate lsass.exe, etc.) = likely compromise
-- Vol2 has more plugins, Vol3 is the future — use what fits your case
+- Vol2 has more plugins, Vol3 is the future, use what fits your case
 - Even without a dump, check `hiberfil.sys` and `pagefile.sys`
