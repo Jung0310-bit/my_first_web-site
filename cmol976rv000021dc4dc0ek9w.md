@@ -277,6 +277,24 @@ consoles               # Console contents
 
 ---
 
+## Questions I Asked Myself During This Investigation
+
+Memory forensics rewards the analyst who pauses to ask better questions, not the analyst who runs every plugin. The mindset shift is from "what tool do I run next?" to "what am I trying to confirm or rule out?"
+
+The questions I returned to repeatedly:
+
+- **"Why is `psscan` showing a process that `pslist` isn't?"**: that gap is the entire point of memory forensics. A process can be hidden from the active list but still resident in memory. The instinct: when two views disagree, follow the disagreement.
+
+- **"What's the parent of this suspicious child process?"**: if `cmd.exe` spawned `powershell.exe`, that's banal. If `outlook.exe` spawned `cmd.exe`, that's a phishing chain. Process tree context turns a single process into a story.
+
+- **"What did this process touch?"**: `cmdline` shows arguments. `handles` shows files and registry keys. `netscan` shows network connections. The process is the protagonist; everything around it is supporting evidence.
+
+- **"What happened immediately before the dump was taken?"**: memory captures a single moment. What was the user doing? Was a known incident triggering the acquisition? The memory dump alone tells you what's running. The context around the dump tells you why it matters.
+
+- **"What would I miss by closing this investigation here?"**: the 30-second pause before declaring an investigation done is where senior analysts catch what junior analysts miss. The plugins won't tell you when to stop; the plugins always run more.
+
+The plugins below are the tools. The questions above are the discipline. Mastering the plugins without the questions produces an analyst who runs commands; mastering both produces an analyst who investigates.
+
 ## Standard Investigation Workflow
 
 Here's the order I typically run Volatility plugins:
