@@ -17,11 +17,7 @@ Threat intelligence only matters if someone can act on it. A feed of 10,000 IOCs
 
 CTI is a continuous cycle, not a linear process. Each phase feeds into the next, and feedback loops back to improve everything.
 
-```
-Direction → Collection → Processing → Analysis → Dissemination → Feedback
-    ↑                                                              ↓
-    └──────────────────────────────────────────────────────────────┘
-```
+The cycle is iterative: **Direction → Collection → Processing → Analysis → Dissemination → Feedback**, where Feedback loops back into the next Direction. Each finished cycle sharpens the next one's questions.
 
 ---
 
