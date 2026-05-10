@@ -4,7 +4,6 @@ datePublished: Tue Feb 03 2026 05:34:49 GMT+0000 (Coordinated Universal Time)
 cuid: cml65zh2x000s02jlcdufcj67
 slug: projectx-e101-building-a-secure-homelab-environment
 cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thumbnails/projectx-s01e01-magazine.png
-tags: active-directory, cybersecurity, wazuh, homelab, blue-team, siem
 
 ---
 
@@ -222,6 +221,20 @@ Configure the `Trigger Condition` so the monitor fires on every match.
 - Equivalent command-line registry edit (alternative to GPO).
 
 ---
+
+## What I Asked Myself While Building This
+
+Pillar 2 of analyst work is asking better questions, not running more tools. Building this lab forced me to externalize the questions I'd otherwise glaze past:
+
+- **"What am I missing?"**: when `corp-svr` got no agent on purpose, the question became: *if I were an analyst on a real SOC and this host went silent for a week, would I notice?* Probably not. The lab's whole point is to make that gap visceral.
+
+- **"Why this rule, and not five others?"**: Wazuh ships with thousands of default rules. Picking `92653` for RDP and writing custom `100002` for FIM forced a justification: this rule fires on the actual attacker action, not on incidental noise around it.
+
+- **"What happened before this?"**: when the SSH brute-force alert fires, the alert itself is uninteresting. What's interesting is the host's auth log 30 minutes earlier (recon? credential spraying from a different IP?). The lab teaches you to look at the alert AND the context window around it.
+
+- **"Why now? Why this host?"**: `corp-svr` runs MailHog. Why is it the host without an agent? Because in a real org, "the SMTP test box" or "the legacy server nobody owns" is exactly the kind of host that gets skipped during agent rollout. This lab is a small version of that organizational pattern.
+
+These are interview questions disguised as lab notes. If you can answer them about your own homelab, you can answer them about a real SOC environment.
 
 ## What This Episode Validated
 
