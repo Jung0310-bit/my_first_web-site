@@ -92,17 +92,14 @@ Developed in 2013 by Caltagirone, Pendergast, and Betz. A framework for analyzin
 
 The components form a diamond shape, edge-connected:
 
-```
-        Adversary
-           /\
-          /  \
-         /    \
-Infrastructure,Capability
-         \    /
-          \  /
-           \/
-         Victim
-```
+| Vertex | Meaning |
+|---|---|
+| **Adversary** | The threat actor (group, APT, individual operator) |
+| **Capability** | The tools, techniques, and malware they use |
+| **Infrastructure** | C2 servers, domains, IPs, and staging hosts they leverage |
+| **Victim** | The targeted organization, system, or user |
+
+Every event ties at least two vertices together. Pivoting from one to another (e.g., from a known IP to the malware that called it) is how analysts expand a single observation into a full investigation.
 
 Every intrusion event has all four.
 
@@ -173,28 +170,17 @@ The higher you push detection, the more pain you cause the attacker.
 
 Note: Bianco's original Pyramid of Pain has six tiers because Host Artifacts and Network Artifacts share the "Annoying" level. Here I split them for clarity.
 
-```
-         ┌─────────┐
-         │  TTPs   │  ← Tough!
-         ├─────────┤
-         │  Tools  │  ← Challenging
-         ├─────────┤
-         │ Network │
-         │Artifacts│  ← Annoying
-         ├─────────┤
-         │  Host   │
-         │Artifacts│  ← Annoying
-         ├─────────┤
-         │ Domain  │
-         │  Names  │  ← Simple
-         ├─────────┤
-         │   IP    │
-         │Addresses│  ← Easy
-         ├─────────┤
-         │  Hash   │
-         │ Values  │  ← Trivial
-         └─────────┘
-```
+| Indicator Type | Pain to Attacker |
+|---|---|
+| **TTPs** (techniques, tactics, procedures) | Tough |
+| **Tools** | Challenging |
+| **Network Artifacts** | Annoying |
+| **Host Artifacts** | Annoying |
+| **Domain Names** | Simple |
+| **IP Addresses** | Easy |
+| **Hash Values** | Trivial |
+
+The higher up the pyramid, the more it costs an attacker to change. Hashes flip with one rebuild; TTPs require redesigning the operation. Detection that anchors on TTPs survives sample mutation; detection that anchors on hashes does not.
 
 ### Layer Breakdown
 
