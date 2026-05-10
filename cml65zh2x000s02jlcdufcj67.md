@@ -3,7 +3,7 @@ title: "[ProjectX] E101: Vulnerable Environment Setup & Wazuh Monitoring"
 datePublished: Tue Feb 03 2026 05:34:49 GMT+0000 (Coordinated Universal Time)
 cuid: cml65zh2x000s02jlcdufcj67
 slug: projectx-e101-building-a-secure-homelab-environment
-cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thumbnails/projectx-e101.png
+cover: https://raw.githubusercontent.com/Jung0310-bit/woogi-blog-assets/main/thumbnails/projectx-s01e01.png
 
 ---
 
